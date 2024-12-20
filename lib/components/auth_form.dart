@@ -12,6 +12,10 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   final _formData = AuthFormData();
 
+  void _submit() {
+    _formKey.currentState?.validate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(

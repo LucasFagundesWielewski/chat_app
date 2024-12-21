@@ -26,24 +26,44 @@ class _AuthFormState extends State<AuthForm> {
           key: _formKey,
           child: Column(
             children: [
+              if (_formData.isSignup)
+                TextFormField(
+                  key: const ValueKey('name'),
+                  initialValue: _formData.name,
+                  onChanged: (name) => _formData.name = name,
+                  decoration: const InputDecoration(labelText: 'Nome'),
+                ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Nome'),
-              ),
-              TextFormField(
+                key: const ValueKey('email'),
+                initialValue: _formData.email,
+                onChanged: (email) => _formData.email = email,
                 decoration: const InputDecoration(labelText: 'E-mail'),
               ),
               TextFormField(
+                key: const ValueKey('password'),
+                initialValue: _formData.password,
+                onChanged: (password) => _formData.password = password,
                 obscureText: true,
                 decoration: const InputDecoration(labelText: 'Senha'),
               ),
               const SizedBox(height: 12),
               ElevatedButton(
-                onPressed: () {},
-                child: const Text('Entrar'),
+                onPressed: _submit,
+                child: Text(
+                  _formData.isLogin ? 'Entrar' : 'Cadastrar',
+                ),
               ),
               TextButton(
-                onPressed: () {},
-                child: const Text('Criar uma nova conta?'),
+                onPressed: () {
+                  setState(() {
+                    _formData.toggleAuthMode();
+                  });
+                },
+                child: Text(
+                  _formData.isLogin
+                      ? 'Criar uma nova conta?'
+                      : 'Já possui conta',
+                ),
               ),
             ],
           ),

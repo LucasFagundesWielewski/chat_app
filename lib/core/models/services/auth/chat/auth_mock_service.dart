@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -5,7 +7,7 @@ import 'package:chat_app/core/models/chat_user.dart';
 import 'package:chat_app/core/models/services/auth/chat/auth_service.dart';
 
 class AuthMockService implements AuthService {
-  static const _defaultUser = ChatUser(
+  static final _defaultUser = ChatUser(
     id: '1',
     name: 'Teste',
     email: 'email@gmail.com',

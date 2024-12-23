@@ -1,6 +1,6 @@
 import 'package:chat_app/components/messages.dart';
 import 'package:chat_app/components/new_messages.dart';
-import 'package:chat_app/core/models/services/auth/chat/auth_service.dart';
+import 'package:chat_app/core/models/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {

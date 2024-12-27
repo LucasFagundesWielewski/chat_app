@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -7,11 +5,11 @@ import 'package:chat_app/core/models/chat_user.dart';
 import 'package:chat_app/core/models/services/auth/auth_service.dart';
 
 class AuthMockService implements AuthService {
-  static final _defaultUser = ChatUser(
-    id: '1',
-    name: 'Teste',
-    email: 'email@gmail.com',
-    imageURL: '/assests/images/avatar.png',
+  static const _defaultUser = ChatUser(
+    id: '222',
+    name: 'Pablo',
+    email: 'pablo@gmail.com.br',
+    imageURL: 'assets/images/avatar.png',
   );
 
   static final Map<String, ChatUser> _users = {
@@ -63,7 +61,7 @@ class AuthMockService implements AuthService {
   }
 
   static void _updateUser(ChatUser? user) {
-    _currentUser = null;
+    _currentUser = user;
     _controller?.add(_currentUser);
   }
 }

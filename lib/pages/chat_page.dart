@@ -18,16 +18,17 @@ class ChatPage extends StatelessWidget {
         ),
         backgroundColor: Colors.blue,
         actions: [
-          DropdownButton(
-            icon: Icon(
-              Icons.more_vert,
-              color: Theme.of(context).primaryIconTheme.color,
-            ),
-            items: [
-              DropdownMenuItem(
-                value: 'logout',
-                child: Container(
-                  child: const Row(
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'logout') {
+                AuthService().logout();
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem<String>(
+                  value: 'logout',
+                  child: Row(
                     children: [
                       Icon(
                         Icons.exit_to_app,
@@ -38,13 +39,12 @@ class ChatPage extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-            ],
-            onChanged: (value) {
-              if (value == 'logout') {
-                AuthService().logout();
-              }
+              ];
             },
+            icon: Icon(
+              Icons.more_vert,
+              color: Theme.of(context).primaryIconTheme.color,
+            ),
           ),
         ],
       ),

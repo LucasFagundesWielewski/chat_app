@@ -3,35 +3,10 @@ import 'dart:math';
 
 import 'package:chat_app/core/models/chat_messages.dart';
 import 'package:chat_app/core/models/chat_user.dart';
-import 'package:chat_app/core/models/services/auth/chat/chat_service.dart';
+import 'package:chat_app/core/models/services/chat/chat_service.dart';
 
 class ChatMockService implements ChatService {
-  static final List<ChatMessage> _msgs = [
-    ChatMessage(
-      id: '1',
-      text: 'Bom dia!',
-      createdAt: DateTime.now(),
-      userId: '123',
-      userName: 'Juan',
-      userImageURL: 'assests/images/avatar.png',
-    ),
-    ChatMessage(
-      id: '2',
-      text: 'Buenos Dias!',
-      createdAt: DateTime.now(),
-      userId: '222',
-      userName: 'Pablo',
-      userImageURL: 'assests/images/avatar.png',
-    ),
-    ChatMessage(
-      id: '3',
-      text: 'Até mais!',
-      createdAt: DateTime.now(),
-      userId: '123',
-      userName: 'Juan',
-      userImageURL: 'assests/images/avatar.png',
-    ),
-  ];
+  static final List<ChatMessage> _msgs = [];
 
   static MultiStreamController<List<ChatMessage>>? _controller;
   static final _msgsStream = Stream<List<ChatMessage>>.multi((controller) {
@@ -55,7 +30,7 @@ class ChatMockService implements ChatService {
       userImageURL: user.imageURL,
     );
     _msgs.add(newMessage);
-    _controller?.add(_msgs);
+    _controller?.add(_msgs.reversed.toList());
     return newMessage;
   }
 }

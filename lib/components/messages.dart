@@ -1,7 +1,7 @@
 import 'package:chat_app/components/message_bubble.dart';
 import 'package:chat_app/core/models/chat_messages.dart';
 import 'package:chat_app/core/models/services/auth/auth_service.dart';
-import 'package:chat_app/core/models/services/auth/chat/chat_service.dart';
+import 'package:chat_app/core/models/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
 class Messages extends StatelessWidget {

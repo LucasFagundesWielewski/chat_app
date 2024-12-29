@@ -1,7 +1,10 @@
 import 'package:chat_app/components/messages.dart';
 import 'package:chat_app/components/new_messages.dart';
 import 'package:chat_app/core/models/services/auth/auth_service.dart';
+import 'package:chat_app/core/models/services/notification/chat_notification_service.dart';
+import 'package:chat_app/pages/notification_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
@@ -46,6 +49,37 @@ class ChatPage extends StatelessWidget {
               color: Theme.of(context).primaryIconTheme.color,
             ),
           ),
+          Stack(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) {
+                      return const NotificationPage();
+                    }),
+                  );
+                },
+                icon: const Icon(
+                  Icons.notifications,
+                  color: Colors.white,
+                ),
+              ),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: CircleAvatar(
+                  maxRadius: 10,
+                  backgroundColor: Colors.red.shade800,
+                  child: Text(
+                    '${Provider.of<ChatNotificationService>(context).itemsCount}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       body: const SafeArea(
@@ -56,6 +90,18 @@ class ChatPage extends StatelessWidget {
           ],
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Provider.of<ChatNotificationService>(
+      //       context,
+      //       listen: false,
+      //     ).add(ChatNotification(
+      //       title: 'Mais uma notificação!',
+      //       body: Random()..nextDouble().toString(),
+      //     ));
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

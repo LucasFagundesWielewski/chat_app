@@ -4,7 +4,7 @@ import 'package:chat_app/core/models/chat_user.dart';
 import 'package:chat_app/core/models/services/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChatMockService implements ChatService {
+class ChatFirebaseService implements ChatService {
   @override
   Stream<List<ChatMessage>> messagesStram() {
     return const Stream<List<ChatMessage>>.empty();
@@ -13,14 +13,22 @@ class ChatMockService implements ChatService {
   @override
   Future<ChatMessage> save(String text, ChatUser user) async {
     final store = FirebaseFirestore.instance;
-    store.collection('chat').add({
+
+    final docRef = await store.collection('chat').add({
       'text': text,
-      'createdAt': DateTime.now()..toIso8601String(),
+      'createdAt': DateTime.now().toIso8601String(),
       'userId': user.id,
       'userName': user.name,
       'userImageURL': user.imageURL,
     });
 
-    return newMessage;
+    return ChatMessage(
+      id: docRef.id,
+      text: text,
+      createdAt: DateTime.now(),
+      userId: user.id,
+      userName: user.name,
+      userImageURL: user.imageURL,
+    );
   }
 }

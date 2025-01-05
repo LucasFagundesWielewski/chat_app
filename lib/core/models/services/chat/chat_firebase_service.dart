@@ -22,13 +22,16 @@ class ChatFirebaseService implements ChatService {
       'userImageURL': user.imageURL,
     });
 
+    final doc = await docRef.get();
+    final data = doc.data()!;
+
     return ChatMessage(
-      id: docRef.id,
-      text: text,
-      createdAt: DateTime.now(),
-      userId: user.id,
-      userName: user.name,
-      userImageURL: user.imageURL,
+      id: doc.id,
+      text: data['text'],
+      createdAt: DateTime.parse(data['createdAt']),
+      userId: data['userId'],
+      userName: data['userName'],
+      userImageURL: data['userImageURL'],
     );
   }
 }

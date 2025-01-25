@@ -35,6 +35,19 @@ class ChatFirebaseService implements ChatService {
     );
   }
 
+  Map<String, dynamic> _toFirestore(
+    ChatMessage msg,
+    SetOptions? options,
+  ) {
+    return {
+      'text': msg.text,
+      'createdAt': msg.createdAt.toIso8601String(),
+      'userId': msg.userId,
+      'userName': msg.userName,
+      'userImageURL': msg.userImageURL,
+    };
+  }
+
   ChatMessage _fromDocumentSnapshot(
     DocumentSnapshot<Map<String, dynamic>> doc,
     SnapshotOptions? options,
